@@ -1,0 +1,18 @@
+{
+  "en": {
+    "updatedLabel": "Last updated:",
+    "legalBackLabel": "Back to home",
+    "legalFaqTitle": "Legal information in preparation",
+    "legalFaqText": "The privacy and cookie information is being reviewed. Contact details will be added when available.",
+    "legalContactCta": "",
+    "legalContactHref": ""
+  },
+  "pl": {
+    "updatedLabel": "Última revisión:",
+    "legalBackLabel": "Volver al inicio",
+    "legalFaqTitle": "Información legal en preparación",
+    "legalFaqText": "La información de privacidad y cookies está en revisión. Los datos de contacto se agregarán cuando estén disponibles.",
+    "legalContactCta": "",
+    "legalContactHref": ""
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "eyebrow": "STRATEGIA / DESIGN / TECHNOLOGIA",
+  "heading": "Nowe możliwości dla",
+  "headingAccent": "ambitnych marek",
+  "description": "Tworzymy nowoczesne strony internetowe, które wzmacniają wizerunek, przyciągają klientów i realnie wspierają rozwój biznesu.",
+  "primaryCTA": { "label": "Rozpocznij projekt", "href": "/kontakt/" },
+  "secondaryCTA": { "label": "Poznaj nas", "href": "/o-nas/" },
+  "trustedBy": "",
+  "trustItems": [],
+  "image": "/mifoto.png",
+  "imageAlt": "Foto firmy",
+  "stats": [
+    { "value": "2000+", "label": "Zrealizowanych projektów" },
+    { "value": "10+", "label": "Lat doświadczenia" },
+    { "value": "800+", "label": "Godzin pracy nad produktem" },
+    { "value": "150M+", "label": "Przychodu u naszych klientów" }
+  ]
+}

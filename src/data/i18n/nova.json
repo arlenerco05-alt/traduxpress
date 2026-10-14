@@ -1,0 +1,298 @@
+{
+  "pl": {
+    "page": {
+      "title": "TraduXpress, tus palabras sin fronteras",
+      "description": "Ayudo a marcas, empresas y organizaciones a conectar con nuevas audiencias mediante la traducción inglés-español, la localización y soluciones lingüísticas que preservan la esencia de cada mensaje.",
+      "heading": "Tus palabras sin fronteras."
+    },
+    "navigation": {
+      "menu": [
+        { "label": "Sobre mí", "href": "#zespol" },
+        { "label": "Servicios", "href": "#uslugi" },
+        { "label": "Portafolio", "href": "#realizacje" },
+        { "label": "Contacto", "href": "#kontakt" }
+      ],
+      "cta": null,
+      "aria": {
+        "menuOpen": "Abrir menú de navegación",
+        "menuClose": "Cerrar menú",
+        "menuExpand": "Desplegar submenú",
+        "navMain": "Navegación principal",
+        "drawer": "Menú de navegación"
+      },
+      "languageLabel": "Seleccionar idioma"
+    },
+    "sections": {
+      "nova-hero-wireframe": {
+        "eyebrow": "TRADUCCIÓN / LOCALIZACIÓN / SUBTITULACIÓN",
+        "heading": "Tus palabras",
+        "headingAccent": "sin fronteras.",
+        "description": "Ayudo a marcas, empresas y organizaciones a conectar con nuevas audiencias mediante la traducción inglés-español, la localización y soluciones lingüísticas que preservan la esencia de cada mensaje.",
+        "primaryCTA": { "label": "Solicitar Cotización", "href": "#kontakt" },
+        "secondaryCTA": { "label": "Conoce mis servicios", "href": "#uslugi" },
+        "image": "/mifoto.png",
+        "imageAlt": "Foto de TraduXpress",
+        "stats": [
+          { "value": "2+", "label": "Años de experiencia práctica" },
+          { "value": "EN ↔ ES", "label": "Idiomas de trabajo" },
+          { "value": "5", "label": "Servicios lingüísticos" },
+          { "value": "2", "label": "Áreas de especialización" }
+        ]
+      },
+      "nova-projects": {
+        "title": "Cada palabra cuenta. Cada proyecto conecta.",
+        "description": "Explora seis ejercicios de portafolio. Los proyectos en preparación están identificados y muestran imágenes ilustrativas, no resultados finales.",
+        "linkLabel": "Explorar portafolio",
+        "linkHref": "#realizacje",
+        "filtersLabel": "Filtrar proyectos por categoría",
+        "filters": [
+          { "key": "all", "label": "Todos" },
+          { "key": "marketing", "label": "Marketing" },
+          { "key": "institutional", "label": "Institucional" },
+          { "key": "localization", "label": "Localización" },
+          { "key": "audiovisual", "label": "Audiovisual" }
+        ],
+        "draftLabel": "En preparación",
+        "publishedLabel": "En el portafolio"
+      },
+      "nova-services": {
+        "title": "Servicios lingüísticos para comunicar con claridad",
+        "description": "Soluciones de inglés ↔ español adaptadas al propósito, el público y el contexto de cada contenido.",
+        "linkLabel": "Solicitar una cotización",
+        "linkHref": "#kontakt",
+        "items": [
+          { "number": "01.", "icon": "translate", "title": "Traducción inglés ↔ español", "description": "Comunica tu mensaje con precisión y naturalidad en el idioma de destino." },
+          { "number": "02.", "icon": "globe", "title": "Localización de contenidos", "description": "Adapta referencias, tono y expresiones a tu público sin perder el propósito del original." },
+          { "number": "03.", "icon": "check-circle", "title": "Revisión y corrección", "description": "Mejora la claridad, coherencia, gramática y fluidez de tus textos." },
+          { "number": "04.", "icon": "closed-captioning", "title": "Subtitulación", "description": "Haz más accesible tu contenido audiovisual con subtítulos claros y bien sincronizados." },
+          { "number": "05.", "icon": "megaphone", "title": "Adaptación publicitaria y comunicacional", "description": "Ajusta mensajes promocionales e institucionales para conectar con su público." }
+        ]
+      },
+      "process-timeline-scroll": {
+        "title": "Un proceso claro, de principio a entrega",
+        "description": "Cada proyecto comienza por entender qué necesitas y termina con una entrega revisada según el alcance acordado.",
+        "stepLabel": "Paso",
+        "items": [
+          { "title": "Cuéntame sobre tu proyecto", "description": "Comparte el tipo de contenido, la combinación lingüística, la extensión aproximada y la fecha deseada." },
+          { "title": "Reviso el alcance", "description": "Reviso el material, el público y el objetivo para definir el servicio adecuado." },
+          { "title": "Recibes una cotización", "description": "Te envío el alcance, el precio y un plazo estimado antes de iniciar." },
+          { "title": "Desarrollo la traducción", "description": "Trabajo en la traducción o adaptación acordada, cuidando el sentido y el contexto." },
+          { "title": "Reviso el texto", "description": "Compruebo la claridad, coherencia y adecuación del contenido." },
+          { "title": "Recibes la entrega final", "description": "Te entrego el material en el formato y dentro del plazo acordados." }
+        ]
+      },
+      "nova-team": {
+        "title": "Traducción con atención al contexto y a las personas",
+        "description": "Soy estudiante universitaria de la Licenciatura en Traducción e Interpretación del Idioma Inglés. Cuento con aproximadamente dos años de experiencia práctica en actividades lingüísticas, principalmente en contextos institucionales, administrativos, educativos y de comunicación. Desde TraduXpress, ofrezco servicios de inglés ↔ español con atención al propósito, el público y los matices culturales de cada texto.",
+        "image": "/mifoto.png",
+        "imageAlt": "Retrato de la profesional detrás de TraduXpress",
+        "checks": ["Formación universitaria en traducción e interpretación", "Experiencia práctica en contextos institucionales y educativos", "Enfoque personal, cuidadoso y transparente"],
+        "teamCount": "",
+        "teamLabel": "",
+        "teamAriaLabel": "",
+        "teamAvatars": [],
+        "buttonLabel": "Conoce el proceso de trabajo",
+        "buttonHref": "#process"
+      },
+      "faq3": {
+        "title": "Preguntas frecuentes",
+        "description": "Información útil sobre los servicios, las cotizaciones y la forma de trabajo antes de iniciar un proyecto.",
+        "tagline": "FAQ",
+        "items": [
+          { "q": "¿Qué combinación de idiomas ofreces?", "a": "Trabajo con inglés ↔ español. La dirección se define según el material y el propósito de cada proyecto." },
+          { "q": "¿Qué tipos de contenido puedo consultar?", "a": "Puedes consultar por contenido comercial, publicitario, institucional, organizacional, educativo y audiovisual, según el alcance del proyecto." },
+          { "q": "¿Cómo solicito una cotización?", "a": "Comparte el tipo de contenido, la combinación lingüística, la extensión aproximada y la fecha deseada. Con esa información podré evaluar el alcance y preparar una cotización." },
+          { "q": "¿Cuánto tarda un proyecto?", "a": "El plazo depende de la extensión, la complejidad, el formato y la fecha solicitada. Se confirma al revisar el proyecto y antes de iniciar." },
+          { "q": "¿Cómo se maneja la confidencialidad?", "a": "El contenido que compartas se trata con discreción y se utiliza únicamente para evaluar y desarrollar el servicio solicitado." },
+          { "q": "¿Puedo solicitar ajustes?", "a": "Sí. Los ajustes relacionados con el alcance acordado se conversan después de la entrega. Las condiciones se especifican en la cotización." }
+        ]
+      },
+      "testimonial-v2": {
+        "title": "Principios que guían cada proyecto",
+        "description": "Un compromiso de trabajo claro y cuidadoso, desde la primera consulta hasta la entrega.",
+        "tagline": "Cómo trabajo",
+        "mode": "principles",
+        "items": [
+          { "title": "Precisión con propósito", "quote": "El texto debe preservar el sentido y cumplir el objetivo para el que fue creado." },
+          { "title": "Cuidado cultural", "quote": "Las palabras deben sentirse naturales para el público al que se dirigen." },
+          { "title": "Comunicación transparente", "quote": "El alcance, los plazos y las dudas se conversan con claridad." }
+        ]
+      }
+    },
+    "footer": {
+      "eyebrow": "¿Tienes un proyecto en mente?",
+      "heading": "Conversemos sobre tu proyecto",
+      "description": "Cuéntame qué necesitas y revisaremos cómo puedo ayudarte. Los datos de contacto se agregarán cuando estén disponibles.",
+      "contactNote": "Los datos de contacto directo están pendientes de configurar.",
+      "primaryLabel": "Solicitar cotización",
+      "primaryHref": "#kontakt",
+      "secondaryLabel": "Explorar servicios",
+      "secondaryHref": "#uslugi",
+      "legalLinks": [
+        { "label": "Aviso de privacidad", "href": "/polityka-prywatnosci/" },
+        { "label": "Cookies", "href": "/cookies/" }
+      ],
+      "footerLinks": [
+        { "label": "Sobre mí", "href": "#zespol" },
+        { "label": "Servicios", "href": "#uslugi" },
+        { "label": "Portafolio", "href": "#realizacje" },
+        { "label": "Proceso", "href": "#process" }
+      ],
+      "ariaLegal": "Documentos legales",
+      "ariaNavigation": "Navegación del pie de página",
+      "copyright": "Todos los derechos reservados.",
+      "attributionPrefix": "",
+      "attributionLinkLabel": "",
+      "attributionLinkHref": ""
+    }
+  },
+  "en": {
+    "page": {
+      "title": "TraduXpress | Your words, without borders.",
+      "description": "English–Spanish translation, localization, proofreading, subtitling, and advertising adaptation for businesses and organizations.",
+      "heading": "Your words, without borders."
+    },
+    "navigation": {
+      "menu": [
+        { "label": "About me", "href": "#zespol" },
+        { "label": "Services", "href": "#services" },
+        { "label": "Portfolio", "href": "#realizacje" },
+        { "label": "Contact", "href": "#contact" }
+      ],
+      "cta": null,
+      "aria": {
+        "menuOpen": "Open navigation menu",
+        "menuClose": "Close menu",
+        "menuExpand": "Expand submenu",
+        "navMain": "Main navigation",
+        "drawer": "Navigation menu"
+      },
+      "languageLabel": "Choose language"
+    },
+    "sections": {
+      "nova-hero-wireframe": {
+        "eyebrow": "TRANSLATION / LOCALIZATION / SUBTITLING",
+        "heading": "Your words,",
+        "headingAccent": "without borders.",
+        "description": "I help businesses and organizations connect with new audiences through English–Spanish translation, localization, and language services that preserve the intent and voice of every message.",
+        "primaryCTA": { "label": "Request a quote", "href": "#contact" },
+        "secondaryCTA": { "label": "Explore my services", "href": "#services" },
+        "trustedBy": "",
+        "trustItems": [],
+        "image": "/mifoto.png",
+        "imageAlt": "TraduXpress photo",
+        "stats": [
+          { "value": "2+", "label": "Years of practical experience" },
+          { "value": "EN ↔ ES", "label": "Working languages" },
+          { "value": "5", "label": "Language services" },
+          { "value": "2", "label": "Areas of focus" }
+        ]
+      },
+      "nova-projects": {
+        "title": "Every word matters. Every project builds a connection.",
+        "description": "Explore six portfolio exercises. Projects in preparation are clearly marked and use illustrative images, not final outcomes.",
+        "linkLabel": "Explore the portfolio",
+        "linkHref": "#realizacje",
+        "filtersLabel": "Filter projects by category",
+        "filters": [
+          { "key": "all", "label": "All" },
+          { "key": "marketing", "label": "Marketing" },
+          { "key": "institutional", "label": "Institutional" },
+          { "key": "localization", "label": "Localization" },
+          { "key": "audiovisual", "label": "Audiovisual" }
+        ],
+        "draftLabel": "In preparation",
+        "publishedLabel": "In the portfolio"
+      },
+      "nova-services": {
+        "title": "Language services for clear, effective communication",
+        "description": "English ↔ Spanish solutions tailored to the purpose, audience, and context of each piece of content.",
+        "linkLabel": "Request a quote",
+        "linkHref": "#contact",
+        "items": [
+          { "number": "01.", "icon": "translate", "title": "English ↔ Spanish translation", "description": "Communicate your message accurately and naturally in the target language." },
+          { "number": "02.", "icon": "globe", "title": "Content localization", "description": "Adapt references, tone, and wording for your audience while preserving the original purpose." },
+          { "number": "03.", "icon": "check-circle", "title": "Proofreading and editing", "description": "Improve the clarity, consistency, grammar, and flow of your writing." },
+          { "number": "04.", "icon": "closed-captioning", "title": "Subtitling", "description": "Make audiovisual content more accessible with clear, well-timed subtitles." },
+          { "number": "05.", "icon": "megaphone", "title": "Advertising and communication adaptation", "description": "Shape promotional and institutional messages to resonate with their intended audience." }
+        ]
+      },
+      "process-timeline-scroll": {
+        "title": "A clear process, from inquiry to delivery",
+        "description": "Every project starts with understanding what you need and ends with a reviewed delivery based on the agreed scope.",
+        "stepLabel": "Step",
+        "items": [
+          { "title": "Tell me about your project", "description": "Share the content type, language direction, approximate length, and desired deadline." },
+          { "title": "I assess the scope", "description": "I review the material, audience, and goal to determine the right service." },
+          { "title": "You receive a quote", "description": "I send you the scope, price, and estimated timeline before work begins." },
+          { "title": "I complete the translation", "description": "I work on the agreed translation or adaptation, taking meaning and context into account." },
+          { "title": "I review the text", "description": "I check the content for clarity, consistency, and suitability." },
+          { "title": "You receive the final delivery", "description": "I deliver the material in the agreed format and within the agreed timeline." }
+        ]
+      },
+      "nova-team": {
+        "title": "Translation shaped by context and people",
+        "description": "I am a university student pursuing a degree in English Translation and Interpretation, with approximately two years of practical experience in language-related work, mainly in institutional, administrative, educational, and communication settings. Through TraduXpress, I provide English ↔ Spanish services with careful attention to each text’s purpose, audience, and cultural nuance.",
+        "image": "/mifoto.png",
+        "imageAlt": "Portrait of the language professional behind TraduXpress",
+        "checks": ["University studies in translation and interpretation", "Practical experience in institutional and educational settings", "A personal, thoughtful, and transparent approach"],
+        "teamCount": "",
+        "teamLabel": "",
+        "teamAriaLabel": "",
+        "teamAvatars": [],
+        "buttonLabel": "Learn about the process",
+        "buttonHref": "#process"
+      },
+      "faq3": {
+        "title": "Frequently asked questions",
+        "description": "Helpful information about services, quotes, and the working process before you start a project.",
+        "tagline": "FAQ",
+        "items": [
+          { "q": "Which language pair do you work with?", "a": "I work with English ↔ Spanish. The direction depends on the material and the purpose of each project." },
+          { "q": "What kinds of content can I ask about?", "a": "You can inquire about commercial, advertising, institutional, organizational, educational, and audiovisual content, depending on the project scope." },
+          { "q": "How do I request a quote?", "a": "Share the content type, language direction, approximate length, and desired deadline. I can use this information to assess the scope and prepare a quote." },
+          { "q": "How long does a project take?", "a": "Timing depends on length, complexity, format, and requested deadline. I confirm it after reviewing the project and before work begins." },
+          { "q": "How is confidentiality handled?", "a": "Content you share is treated with discretion and used only to assess and complete the requested service." },
+          { "q": "Can I request revisions?", "a": "Yes. Revisions related to the agreed scope can be discussed after delivery. The conditions will be specified in the quote." }
+        ]
+      },
+      "testimonial-v2": {
+        "title": "Principles behind every project",
+        "description": "A thoughtful and clear approach, from the first inquiry through to delivery.",
+        "tagline": "How I work",
+        "mode": "principles",
+        "items": [
+          { "title": "Purposeful accuracy", "quote": "The text should preserve meaning and serve the goal it was created to achieve." },
+          { "title": "Cultural awareness", "quote": "The wording should feel natural to the audience it is meant for." },
+          { "title": "Clear communication", "quote": "Scope, timelines, and questions are discussed openly." }
+        ]
+      }
+    },
+    "footer": {
+      "eyebrow": "Have a project in mind?",
+      "heading": "Let’s discuss your project",
+      "description": "Tell me what you need, and we can discuss how I may help. Contact details will be added when available.",
+      "contactNote": "Direct contact details are pending configuration.",
+      "primaryLabel": "Request a quote",
+      "primaryHref": "#contact",
+      "secondaryLabel": "Explore services",
+      "secondaryHref": "#services",
+      "legalLinks": [
+        { "label": "Privacy notice", "href": "/polityka-prywatnosci/" },
+        { "label": "Cookies", "href": "/cookies/" }
+      ],
+      "footerLinks": [
+        { "label": "About me", "href": "#zespol" },
+        { "label": "Services", "href": "#services" },
+        { "label": "Portfolio", "href": "#realizacje" },
+        { "label": "Process", "href": "#process" }
+      ],
+      "ariaLegal": "Legal documents",
+      "ariaNavigation": "Footer navigation",
+      "copyright": "All rights reserved.",
+      "attributionPrefix": "",
+      "attributionLinkLabel": "",
+      "attributionLinkHref": ""
+    }
+  }
+}

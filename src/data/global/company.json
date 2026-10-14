@@ -1,0 +1,34 @@
+{
+  "fullName": "TraduXpress",
+  "name": "TraduXpress",
+  "branding": {
+    "icon": "ph-star",
+    "font": "Satoshi",
+    "tagline": "Tus palabras sin fronteras.",
+    "logoImage": "/logo.png",
+    "favicon": "/favicon.svg",
+    "logoSuffix": "Logo"
+  },
+  "address": "",
+  "zipCode": "",
+  "city": "",
+  "phone": "",
+  "email": "",
+  "hours": "",
+  "nip": "",
+  "krs": "",
+  "regon": "",
+  "siteUrl": "",
+  "smtp": {
+    "smtpHost": "",
+    "smtpPort": 587,
+    "smtpUser": "",
+    "smtpPass": ""
+  },
+  "socials": {
+    "facebook": "",
+    "instagram": "",
+    "youtube": "",
+    "twitter": ""
+  }
+}

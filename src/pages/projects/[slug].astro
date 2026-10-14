@@ -1,0 +1,28 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ProjectDetail from "@components/ProjectDetail.astro";
+import { projects } from "@data/translation-projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug } }));
+}
+
+const { slug } = Astro.params;
+const project = projects.find((entry) => entry.slug === slug);
+
+if (!project) throw new Error(`Portfolio project not found: ${slug}`);
+
+const copy = project.en;
+---
+
+<Layout
+  title={`${copy.title} | TraduXpress`}
+  description={copy.context}
+  locale="en"
+  lang="en"
+  navbarVariant="floating"
+  footerVariant="nova"
+  fullBleedTop={true}
+>
+  <ProjectDetail project={project} locale="en" />
+</Layout>
