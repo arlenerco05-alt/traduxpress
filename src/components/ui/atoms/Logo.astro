@@ -25,15 +25,26 @@ const logoPath = company.branding.logoImage;
   {logoPath ? (
     <img
       src={logoPath}
-      alt={`${company.name} ${company.branding.logoSuffix || ""}`}
+      alt=""
+      aria-hidden="true"
       width="512"
       height="512"
       loading="eager"
-      class={density === "compact" ? "h-14 w-auto object-contain lg:h-16" : "h-12 w-auto object-contain lg:h-14"}
+      class={density === "compact" ? "h-10 w-10 object-contain lg:h-12 lg:w-12" : "h-12 w-12 object-contain lg:h-14 lg:w-14"}
     />
   ) : (
     <span class="font-heading text-base font-bold tracking-[0.18em]" aria-label={company.name}>
-      {company.name.toUpperCase()}
+      {company.name}
+    </span>
+  )}
+  {logoPath && showText && (
+    <span
+      class:list={[
+        "font-heading text-sm font-bold tracking-tight lg:text-base",
+        variant === "light" ? "text-white" : variant === "dark" ? "text-brand-dark" : "text-inherit",
+      ]}
+    >
+      {company.name}
     </span>
   )}
 </div>

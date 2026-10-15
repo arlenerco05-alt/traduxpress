@@ -28,7 +28,7 @@
         "heading": "Tus palabras",
         "headingAccent": "sin fronteras.",
         "description": "Ayudo a marcas, empresas y organizaciones a conectar con nuevas audiencias mediante la traducción inglés-español, la localización y soluciones lingüísticas que preservan la esencia de cada mensaje.",
-        "primaryCTA": { "label": "Solicitar Cotización", "href": "#kontakt" },
+        "primaryCTA": { "label": "Solicitar Cotización", "href": "/pl/cotizar/" },
         "secondaryCTA": { "label": "Conoce mis servicios", "href": "#uslugi" },
         "image": "/mifoto.png",
         "imageAlt": "Foto de TraduXpress",
@@ -41,19 +41,20 @@
       },
       "nova-projects": {
         "title": "Cada palabra cuenta. Cada proyecto conecta.",
-        "description": "Explora seis ejercicios de portafolio. Los proyectos en preparación están identificados y muestran imágenes ilustrativas, no resultados finales.",
+        "description": "Cinco muestras independientes de traducción, localización, edición y subtitulación. El sexto proyecto se encuentra en desarrollo.",
         "linkLabel": "Explorar portafolio",
         "linkHref": "#realizacje",
         "filtersLabel": "Filtrar proyectos por categoría",
         "filters": [
           { "key": "all", "label": "Todos" },
           { "key": "marketing", "label": "Marketing" },
-          { "key": "institutional", "label": "Institucional" },
+          { "key": "institutional", "label": "Edición y corporativo" },
           { "key": "localization", "label": "Localización" },
           { "key": "audiovisual", "label": "Audiovisual" }
         ],
-        "draftLabel": "En preparación",
-        "publishedLabel": "En el portafolio"
+        "actionLabel": "Ver proyecto",
+        "previewLabel": "Muestra visual pendiente",
+        "upcomingLabel": "Próximamente"
       },
       "nova-services": {
         "title": "Servicios lingüísticos para comunicar con claridad",
@@ -144,6 +145,34 @@
       "attributionPrefix": "",
       "attributionLinkLabel": "",
       "attributionLinkHref": ""
+    },
+    "quote": {
+      "title": "Hablemos de tu proyecto",
+      "subtitle": "Cuéntame qué necesitas y prepararé una cotización personalizada para ti",
+      "fields": {
+        "name": "Nombre completo",
+        "email": "Correo electrónico",
+        "service": "Servicio solicitado",
+        "servicePlaceholder": "Selecciona un servicio",
+        "language": "Combinación de idiomas",
+        "languagePlaceholder": "Selecciona una combinación",
+        "deadline": "Fecha de entrega deseada (opcional)",
+        "description": "Descripción del proyecto",
+        "descriptionPlaceholder": "Cuéntame sobre el contenido, la extensión y cualquier detalle útil."
+      },
+      "languages": {
+        "en-es": "Inglés → Español",
+        "es-en": "Español → Inglés",
+        "other": "Otro"
+      },
+      "submit": "Enviar solicitud",
+      "sending": "Enviando...",
+      "success": "Tu solicitud se envió correctamente. Me pondré en contacto contigo pronto.",
+      "error": "No se pudo enviar la solicitud. Inténtalo de nuevo más tarde.",
+      "notConfigured": "El formulario aún no está habilitado para recibir solicitudes. Inténtalo más tarde.",
+      "privacy": "Usaré tus datos únicamente para responder a esta solicitud. Consulta el aviso de privacidad.",
+      "privacyLink": "aviso de privacidad",
+      "back": "Volver al inicio"
     }
   },
   "en": {
@@ -175,7 +204,7 @@
         "heading": "Your words,",
         "headingAccent": "without borders.",
         "description": "I help businesses and organizations connect with new audiences through English–Spanish translation, localization, and language services that preserve the intent and voice of every message.",
-        "primaryCTA": { "label": "Request a quote", "href": "#contact" },
+        "primaryCTA": { "label": "Request a quote", "href": "/quote/" },
         "secondaryCTA": { "label": "Explore my services", "href": "#services" },
         "trustedBy": "",
         "trustItems": [],
@@ -190,19 +219,20 @@
       },
       "nova-projects": {
         "title": "Every word matters. Every project builds a connection.",
-        "description": "Explore six portfolio exercises. Projects in preparation are clearly marked and use illustrative images, not final outcomes.",
+        "description": "Five independent samples in translation, localization, editing, and subtitling. The sixth project is in development.",
         "linkLabel": "Explore the portfolio",
         "linkHref": "#realizacje",
         "filtersLabel": "Filter projects by category",
         "filters": [
           { "key": "all", "label": "All" },
           { "key": "marketing", "label": "Marketing" },
-          { "key": "institutional", "label": "Institutional" },
+          { "key": "institutional", "label": "Editing and corporate" },
           { "key": "localization", "label": "Localization" },
           { "key": "audiovisual", "label": "Audiovisual" }
         ],
-        "draftLabel": "In preparation",
-        "publishedLabel": "In the portfolio"
+        "actionLabel": "View project",
+        "previewLabel": "Visual sample pending",
+        "upcomingLabel": "Coming soon"
       },
       "nova-services": {
         "title": "Language services for clear, effective communication",
@@ -293,6 +323,34 @@
       "attributionPrefix": "",
       "attributionLinkLabel": "",
       "attributionLinkHref": ""
+    },
+    "quote": {
+      "title": "Let's discuss your project",
+      "subtitle": "Tell me what you need, and I'll prepare a personalized quote for you.",
+      "fields": {
+        "name": "Full name",
+        "email": "Email address",
+        "service": "Service requested",
+        "servicePlaceholder": "Select a service",
+        "language": "Language combination",
+        "languagePlaceholder": "Select a language combination",
+        "deadline": "Desired delivery date (optional)",
+        "description": "Project description",
+        "descriptionPlaceholder": "Tell me about the content, length, and any helpful details."
+      },
+      "languages": {
+        "en-es": "English → Spanish",
+        "es-en": "Spanish → English",
+        "other": "Other"
+      },
+      "submit": "Send request",
+      "sending": "Sending...",
+      "success": "Your request was sent successfully. I'll be in touch soon.",
+      "error": "Your request could not be sent. Please try again later.",
+      "notConfigured": "This form is not yet configured to receive requests. Please try again later.",
+      "privacy": "I will use your details only to respond to this request. Read the privacy notice.",
+      "privacyLink": "privacy notice",
+      "back": "Back to home"
     }
   }
 }

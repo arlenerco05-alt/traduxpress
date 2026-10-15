@@ -53,6 +53,20 @@ The default form points to `/send-form.php`. Configure that endpoint for the hos
 
 Do not commit SMTP credentials, API keys or other secrets. Keep them in environment variables on the hosting provider.
 
+## Quote request form (Vercel)
+
+The homepage quote button opens the localized quote page. Its `/api/quote` endpoint is a Vercel serverless function and sends HTML email through the Resend SDK. It uses `onboarding@resend.dev` as the sender and delivers requests to `traduxpress.contacto@gmail.com`. The static Astro build remains in `dist/`; Vercel must deploy the repository's root `api/quote.ts` function alongside that output.
+
+For local testing, copy `.env.example` to `.env` and enter your Resend API key after `RESEND_API_KEY=`. The regular `npm run dev` command starts Astro only; it does not run the root `/api/quote.ts` Vercel function. Run `npx vercel dev` instead to test both the site and the API locally (the Vercel CLI may ask you to sign in and link the project).
+
+For production, add the same variable in Vercel's project environment settings and redeploy:
+
+```text
+RESEND_API_KEY=your_resend_api_key
+```
+
+Keep the key private and do not commit `.env` or its value. Until a key is configured, the form returns an error and never displays a successful-submission message. The endpoint validates fields and request origin and applies a honeypot and best-effort per-instance rate limiting. Resend's onboarding sender is intended for testing; configure a sender on a verified domain before relying on production delivery.
+
 ## Final checks
 
 After deployment, verify both language versions, mobile navigation, the contact form, canonical URL, sitemap.xml, robots.txt, favicon, Open Graph image and legal pages.

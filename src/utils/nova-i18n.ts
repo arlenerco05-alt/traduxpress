@@ -35,12 +35,16 @@ export function getNovaLocalePath(locale: NovaLocale, currentPath = '/'): string
   const englishProject = currentPath.match(/^\/projects\/([^/]+)\/?$/);
   const spanishProject = currentPath.match(/^\/proyectos\/([^/]+)\/?$/);
   const legalPage = currentPath.match(/^\/(?:pl\/)?(cookies|polityka-prywatnosci)\/?$/);
+  const quotePage = /^\/(?:pl\/cotizar|quote)\/?$/.test(currentPath);
 
   if (locale === 'en' && spanishProject) {
     return withNovaBase(`/projects/${spanishProject[1]}/`);
   }
   if (locale === 'pl' && englishProject) {
     return withNovaBase(`/proyectos/${englishProject[1]}/`);
+  }
+  if (quotePage) {
+    return withNovaBase(locale === 'en' ? '/quote/' : '/pl/cotizar/');
   }
   if (legalPage) {
     const path = legalPage[1] === 'cookies'

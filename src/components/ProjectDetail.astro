@@ -1,6 +1,6 @@
 ---
 import type { projects } from "@data/translation-projects";
-import type { NovaLocale } from "@utils/nova-i18n";
+import { getNovaNavigationPath, type NovaLocale } from "@utils/nova-i18n";
 
 interface Props {
   project: (typeof projects)[number];
@@ -9,147 +9,455 @@ interface Props {
 
 const { project, locale } = Astro.props;
 const copy = locale === "pl" ? project.es : project.en;
-const languageNames = locale === "pl"
-  ? { en: "inglés", es: "español", "es-SV": "español salvadoreño" }
-  : { en: "English", es: "Spanish", "es-SV": "Salvadoran Spanish" };
-const sourceLanguage = project.direction.length === 2
-  ? languageNames[project.direction[0]]
-  : locale === "pl" ? "por definir" : "to be determined";
-const targetLanguage = project.direction.length === 2
-  ? languageNames[project.direction[1]]
-  : locale === "pl" ? "por definir" : "to be determined";
-const combination = project.direction.length === 2
-  ? `${sourceLanguage} → ${targetLanguage}`
-  : locale === "pl" ? "Por definir" : "To be determined";
-const labels = locale === "pl"
+const isSpanish = locale === "pl";
+const languageName = (code: (typeof project.direction)[number]) => {
+  if (code === "es-SV") return isSpanish ? "español salvadoreño" : "Salvadoran Spanish";
+  if (code === "es") return isSpanish ? "español" : "Spanish";
+  return isSpanish ? "inglés" : "English";
+};
+const sourceLanguage = languageName(project.direction[0]);
+const targetLanguage = languageName(project.direction[1]);
+const labels = isSpanish
   ? {
       back: "Volver al portafolio",
-      area: "Área",
-      combination: "Combinación lingüística",
-      type: "Especialidad",
-      context: "Contexto",
-      audience: "Público objetivo",
-      objective: "Objetivo de traducción",
-      texts: "Texto original y versión traducida",
-      original: `Texto original · ${sourceLanguage}`,
-      translated: `Traducción · ${targetLanguage}`,
-      decisions: "Decisiones lingüísticas",
-      visual: "Resultado visual",
-      pending: "En desarrollo",
-      preparation: "Proyecto en preparación",
-      published: "Proyecto en el portafolio",
-      imageNote: "Imagen ilustrativa provisional; no representa el resultado de un proyecto final.",
-      note: "Nota del proyecto",
+      language: "Idiomas",
+      category: "Categoría",
+      decisions: "Decisiones de traducción",
+      original: "Original",
+      adaptation: "Versión adaptada",
+      visual: "Piezas visuales",
+      noArtwork: "Las imágenes de la pieza original y la propuesta adaptada se añadirán cuando estén disponibles.",
+      compare: "Muestra bilingüe",
+      noSourceSample: "El texto original se añadirá cuando se proporcione la muestra bilingüe.",
+      noTargetSample: "La traducción localizada se añadirá cuando se proporcione la muestra bilingüe.",
+      document: "Descargar documento bilingüe",
+      source: "Antes",
+      revised: "Después",
+      noEdit: "El documento y la comparación de edición se incorporarán cuando se proporcione el archivo.",
+      trackedChanges: "Consultar documento con Control de cambios",
+      sourceDocument: "Descargar documento original",
+      correctedDocument: "Descargar versión corregida",
+      video: "Video subtitulado",
+      noVideo: "El video MP4 final y los subtítulos SRT se añadirán cuando estén disponibles.",
+      downloadSrt: "Descargar subtítulos SRT",
+      subtitleStyle: "Diseño de subtítulos: recuadros rosados con texto blanco.",
+      note: "Nota",
+      independent: "Muestra independiente",
+      notProvided: "Archivo pendiente",
     }
   : {
       back: "Back to the portfolio",
-      area: "Category",
-      combination: "Language direction",
-      type: "Specialty",
-      context: "Context",
-      audience: "Target audience",
-      objective: "Translation objective",
-      texts: "Source text and translated version",
-      original: `Source text · ${sourceLanguage}`,
-      translated: `Translation · ${targetLanguage}`,
-      decisions: "Linguistic decisions",
-      visual: "Visual outcome",
-      pending: "In progress",
-      preparation: "Project in preparation",
-      published: "Project in the portfolio",
-      imageNote: "Temporary illustrative image; it does not represent a completed project.",
-      note: "Project note",
+      language: "Languages",
+      category: "Category",
+      decisions: "Translation decisions",
+      original: "Original",
+      adaptation: "Adapted version",
+      visual: "Artwork",
+      noArtwork: "The original artwork and adapted proposal will be added when the files are available.",
+      compare: "Bilingual sample",
+      noSourceSample: "The source text will be added when the bilingual sample is provided.",
+      noTargetSample: "The localized translation will be added when the bilingual sample is provided.",
+      document: "Download bilingual document",
+      source: "Before",
+      revised: "After",
+      noEdit: "The document and editing comparison will be added when the file is provided.",
+      trackedChanges: "View document with Track Changes",
+      sourceDocument: "Download source document",
+      correctedDocument: "Download corrected version",
+      video: "Subtitled video",
+      noVideo: "The final MP4 video and SRT subtitles will be added when available.",
+      downloadSrt: "Download SRT subtitles",
+      subtitleStyle: "Subtitle design: pink boxes with white text.",
+      note: "Note",
+      independent: "Independent sample",
+      notProvided: "File pending",
     };
-const homeHref = locale === "pl" ? "/pl/#realizacje" : "/#realizacje";
+const homeHref = getNovaNavigationPath("/#realizacje", locale, Astro.url.pathname);
 ---
 
-<main class="bg-[var(--ui-bg-page)] text-brand-dark">
-  <section class="ui-container pb-12 pt-24 md:pb-16 md:pt-32">
-    <div class="mb-6">
-      <a href={homeHref} class="inline-flex min-h-11 items-center gap-2 text-sm font-medium tracking-[0.08em] text-brand-dark/70 uppercase transition hover:text-brand-accent">
-        <span aria-hidden="true">←</span>
-        <span>{labels.back}</span>
+<main class="project-detail">
+  <section class="project-detail__hero">
+    <div class="ui-container">
+      <a class="project-detail__back" href={homeHref}>
+        <span aria-hidden="true">←</span> {labels.back}
       </a>
+      <p class="project-detail__eyebrow">{copy.category}</p>
+      <h1>{copy.title}</h1>
+      <p class="project-detail__summary">{copy.context}</p>
+      <div class="project-detail__metadata">
+        <p><span>{labels.category}</span>{copy.type}</p>
+        <p><span>{labels.language}</span>{sourceLanguage} → {targetLanguage}</p>
+      </div>
     </div>
-    <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand-primary/80">{copy.category}</p>
-        <h1 class="mt-3 max-w-xl text-4xl font-semibold tracking-tight text-brand-dark md:text-5xl">{copy.title}</h1>
-        <p class="mt-3 inline-flex rounded-full border border-brand-dark/15 bg-white/70 px-3 py-1.5 text-xs font-semibold text-brand-dark/75">
-          {project.published ? labels.published : labels.preparation}
-        </p>
-        <div class="mt-6 grid gap-4 sm:grid-cols-3">
-          <div class="rounded-2xl border border-brand-dark/10 bg-white/60 p-4 shadow-sm">
-            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-brand-dark/50">{labels.area}</p>
-            <p class="mt-2 text-sm font-medium text-brand-dark">{copy.category}</p>
-          </div>
-          <div class="rounded-2xl border border-brand-dark/10 bg-white/60 p-4 shadow-sm">
-            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-brand-dark/50">{labels.combination}</p>
-            <p class="mt-2 text-sm font-medium text-brand-dark">{combination}</p>
-          </div>
-          <div class="rounded-2xl border border-brand-dark/10 bg-white/60 p-4 shadow-sm">
-            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-brand-dark/50">{labels.type}</p>
-            <p class="mt-2 text-sm font-medium text-brand-dark">{copy.type}</p>
-          </div>
+  </section>
+
+  {project.kind === "transcreation" && (
+    <section class="ui-container project-detail__section" aria-labelledby="transcreation-heading">
+      <h2 id="transcreation-heading">{labels.visual}</h2>
+      <div class="project-detail__creative-grid">
+        <article class="project-detail__creative project-detail__creative--original">
+          <p class="project-detail__eyebrow">{labels.original} · {sourceLanguage}</p>
+          <p class="project-detail__slogan">{project.sourceText}</p>
+          {project.media.originalArtwork ? (
+            <img src={project.media.originalArtwork} alt={copy.imageAlt} loading="lazy" />
+          ) : (
+            <p class="project-detail__file-note">{labels.notProvided}</p>
+          )}
+        </article>
+        <article class="project-detail__creative project-detail__creative--adapted">
+          <p class="project-detail__eyebrow">{labels.adaptation} · {targetLanguage}</p>
+          <p class="project-detail__slogan">{project.targetText}</p>
+          {project.media.adaptedArtwork ? (
+            <img src={project.media.adaptedArtwork} alt={copy.imageAlt} loading="lazy" />
+          ) : (
+            <p class="project-detail__file-note">{labels.notProvided}</p>
+          )}
+        </article>
+      </div>
+      <p class="project-detail__caption">{labels.noArtwork}</p>
+    </section>
+  )}
+
+  {project.kind === "localization" && (
+    <section class="ui-container project-detail__section" aria-labelledby="localization-heading">
+      <h2 id="localization-heading">{labels.compare}</h2>
+      <div class="project-detail__comparison">
+        <article>
+          <h3>{labels.original} · {sourceLanguage}</h3>
+          <p>{project.sourceText ?? labels.noSourceSample}</p>
+        </article>
+        <article>
+          <h3>{labels.adaptation} · {targetLanguage}</h3>
+          <p>{project.targetText ?? labels.noTargetSample}</p>
+        </article>
+      </div>
+      {project.media.screenshots && project.media.screenshots.length > 0 && (
+        <div class="project-detail__gallery" aria-label={labels.visual}>
+          {project.media.screenshots.map((image, index) => (
+            <img src={image} alt={`${copy.imageAlt} ${index + 1}`} loading="lazy" />
+          ))}
         </div>
+      )}
+      {project.media.bilingualDocument && (
+        <a class="project-detail__download" href={project.media.bilingualDocument} download>
+          {labels.document}
+        </a>
+      )}
+    </section>
+  )}
+
+  {project.kind === "editing" && (
+    <section class="ui-container project-detail__section" aria-labelledby="editing-heading">
+      <h2 id="editing-heading">{labels.source} / {labels.revised}</h2>
+      <div class="project-detail__comparison">
+        <article>
+          <h3>{labels.source}</h3>
+          {project.beforeText ? <p>{project.beforeText}</p> : <p>{labels.noEdit}</p>}
+        </article>
+        <article>
+          <h3>{labels.revised}</h3>
+          {project.afterText ? <p>{project.afterText}</p> : <p>{labels.noEdit}</p>}
+        </article>
       </div>
-      <div class="overflow-hidden rounded-[2rem] border border-brand-dark/10 bg-white shadow-[0_20px_60px_rgba(23,29,42,0.08)]">
-        <img src={project.image} alt={copy.imageAlt} class="h-full w-full object-cover" />
-        <p class="px-5 py-3 text-xs leading-relaxed text-brand-dark/60">{labels.imageNote}</p>
+      <div class="project-detail__downloads">
+        {project.media.sourceDocument && <a class="project-detail__download" href={project.media.sourceDocument} download>{labels.sourceDocument}</a>}
+        {project.media.trackedChangesDocument && <a class="project-detail__download" href={project.media.trackedChangesDocument} download>{labels.trackedChanges}</a>}
+        {project.media.correctedDocument && <a class="project-detail__download" href={project.media.correctedDocument} download>{labels.correctedDocument}</a>}
       </div>
-    </div>
+    </section>
+  )}
+
+  {project.kind === "subtitling" && (
+    <section class="ui-container project-detail__section" aria-labelledby="video-heading">
+      <h2 id="video-heading">{labels.video}</h2>
+      {project.media.video ? (
+        <video class="project-detail__video" controls preload="metadata" poster={project.media.poster}>
+          <source src={project.media.video} type="video/mp4" />
+        </video>
+      ) : (
+        <div class="project-detail__placeholder">
+          <p>{labels.noVideo}</p>
+        </div>
+      )}
+      {project.slug === "glossarie-subtitulacion-publicitaria" && (
+        <p class="project-detail__caption">{labels.subtitleStyle}</p>
+      )}
+      {project.media.subtitles && (
+        <a class="project-detail__download" href={project.media.subtitles} download>
+          {labels.downloadSrt}
+        </a>
+      )}
+    </section>
+  )}
+
+  <section class="ui-container project-detail__section" aria-labelledby="decisions-heading">
+    <h2 id="decisions-heading">{labels.decisions}</h2>
+    <ul class="project-detail__decisions">
+      {copy.decisions.map((decision) => <li>{decision}</li>)}
+    </ul>
   </section>
 
-  <section class="ui-container pb-12 md:pb-16">
-    <div class="rounded-[2rem] border border-brand-dark/10 bg-white/80 p-6 md:p-8">
-      <h2 class="mb-6 text-sm font-semibold uppercase tracking-[0.2em] text-brand-dark/70">{labels.context}</h2>
-      <div class="grid gap-6 md:grid-cols-3">
-        <div><h3 class="text-lg font-semibold text-brand-dark">{labels.context}</h3><p class="mt-2 text-brand-dark/75">{copy.context}</p></div>
-        <div><h3 class="text-lg font-semibold text-brand-dark">{labels.audience}</h3><p class="mt-2 text-brand-dark/75">{copy.audience}</p></div>
-        <div><h3 class="text-lg font-semibold text-brand-dark">{labels.objective}</h3><p class="mt-2 text-brand-dark/75">{copy.objective}</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="ui-container pb-12 md:pb-16">
-    <h2 class="mb-6 text-sm font-semibold uppercase tracking-[0.2em] text-brand-dark/60">{labels.texts}</h2>
-    <div class="grid gap-6 md:grid-cols-2">
-      <div class="rounded-[1.5rem] border border-brand-dark/10 bg-white/80 p-6 shadow-sm">
-        <h3 class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-brand-dark/50">{labels.original}</h3>
-        <p class="text-lg leading-relaxed text-brand-dark/80">{project.original}</p>
-      </div>
-      <div class="rounded-[1.5rem] border border-brand-dark/10 bg-white/80 p-6 shadow-sm">
-        <h3 class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-brand-dark/50">{labels.translated}</h3>
-        <p class="text-lg leading-relaxed text-brand-dark/80">{project.translated}</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="ui-container pb-12 md:pb-16">
-    <div class="rounded-[2rem] border border-brand-dark/10 bg-brand-dark px-6 py-7 text-brand-light md:px-8">
-      <h2 class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-light/75">{labels.decisions}</h2>
-      <ul class="mt-5 space-y-4">
-        {copy.decisions.map((decision) => <li class="flex gap-3 text-base leading-relaxed text-brand-light/90"><span class="mt-2 inline-block size-2.5 shrink-0 rounded-full bg-brand-primary" aria-hidden="true"></span><span>{decision}</span></li>)}
-      </ul>
-    </div>
-  </section>
-
-  <section class="ui-container pb-12 md:pb-16">
-    <div class="rounded-[2rem] border border-brand-dark/10 bg-white/80 p-6 md:p-8">
-      <div class="mb-5 flex items-center gap-2">
-        <span class="inline-flex size-2.5 rounded-full bg-brand-accent" aria-hidden="true"></span>
-        <h2 class="text-sm font-semibold uppercase tracking-[0.2em] text-brand-dark/70">{labels.visual}</h2>
-      </div>
-      <div class="rounded-[1.5rem] border border-dashed border-brand-dark/20 bg-[linear-gradient(135deg,rgba(20,48,62,0.05),rgba(227,184,122,0.1))] p-5 md:p-6">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand-dark/50">{labels.pending}</p>
-        <p class="mt-3 text-lg leading-relaxed text-brand-dark">{copy.visual}</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="ui-container pb-16 md:pb-20">
-    <p class="rounded-[1.5rem] border border-dashed border-brand-dark/25 bg-brand-dark/5 px-5 py-6 text-sm leading-relaxed text-brand-dark/80 md:px-7">
-      <strong class="font-semibold">{labels.note}:</strong> {copy.note}
-    </p>
+  <section class="ui-container project-detail__section project-detail__section--last">
+    <p class="project-detail__note"><strong>{labels.note}:</strong> {copy.note}</p>
   </section>
 </main>
+
+<style>
+  .project-detail {
+    --project-paper: #f7f1e9;
+    --project-rose: #e4c7bd;
+    --project-wine: #5c303b;
+    --project-ink: #3f2823;
+    color: var(--project-ink);
+    background: var(--project-paper);
+  }
+
+  .project-detail__hero {
+    padding: clamp(7rem, 14vw, 12rem) 0 3.5rem;
+    background:
+      radial-gradient(ellipse at 88% 12%, rgb(174 112 116 / 0.14), transparent 34%),
+      var(--project-paper);
+  }
+
+  .project-detail__back {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.55rem;
+    color: rgb(63 40 35 / 0.72);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .project-detail__back:hover,
+  .project-detail__back:focus-visible {
+    color: var(--project-wine);
+  }
+
+  .project-detail__eyebrow {
+    margin: 1.75rem 0 0;
+    color: var(--project-wine);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .project-detail__hero h1 {
+    max-width: 19ch;
+    margin: 0.7rem 0 0;
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 7vw, 5.75rem);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 0.99;
+    text-wrap: balance;
+  }
+
+  .project-detail__summary {
+    max-width: 48rem;
+    margin: 1.25rem 0 0;
+    color: rgb(63 40 35 / 0.78);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.7;
+  }
+
+  .project-detail__metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .project-detail__metadata p {
+    display: grid;
+    gap: 0.35rem;
+    min-width: min(100%, 13rem);
+    margin: 0;
+    border: 1px solid rgb(63 40 35 / 0.12);
+    border-radius: 1rem;
+    padding: 0.85rem 1rem;
+    background: rgb(255 255 255 / 0.48);
+    font-size: 0.9rem;
+  }
+
+  .project-detail__metadata span {
+    color: rgb(63 40 35 / 0.56);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project-detail__section {
+    padding-top: 1.5rem;
+    padding-bottom: clamp(2.5rem, 6vw, 5rem);
+  }
+
+  .project-detail__section h2 {
+    margin: 0 0 1.35rem;
+    font-family: var(--font-heading);
+    font-size: clamp(1.65rem, 3.5vw, 2.7rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+
+  .project-detail__creative-grid,
+  .project-detail__comparison {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-detail__creative,
+  .project-detail__comparison article {
+    min-width: 0;
+    border: 1px solid rgb(63 40 35 / 0.12);
+    border-radius: 1.5rem;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    background: rgb(255 255 255 / 0.58);
+  }
+
+  .project-detail__creative--adapted {
+    background: #ead8d1;
+  }
+
+  .project-detail__creative .project-detail__eyebrow {
+    margin: 0;
+  }
+
+  .project-detail__slogan {
+    margin: 2rem 0;
+    color: var(--project-wine);
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 600;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  .project-detail__creative img,
+  .project-detail__gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.9rem;
+  }
+
+  .project-detail__file-note,
+  .project-detail__caption {
+    color: rgb(63 40 35 / 0.62);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .project-detail__caption {
+    margin: 0.8rem 0 0;
+  }
+
+  .project-detail__comparison article h3 {
+    margin: 0 0 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project-detail__comparison article p {
+    margin: 0;
+    color: rgb(63 40 35 / 0.68);
+    line-height: 1.65;
+  }
+
+  .project-detail__gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .project-detail__placeholder {
+    border: 1px dashed rgb(92 48 59 / 0.35);
+    border-radius: 1.25rem;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    background: linear-gradient(130deg, rgb(228 199 189 / 0.44), rgb(255 255 255 / 0.52));
+    color: rgb(63 40 35 / 0.75);
+    line-height: 1.65;
+  }
+
+  .project-detail__placeholder p {
+    margin: 0;
+  }
+
+  .project-detail__placeholder p + p {
+    margin-top: 0.8rem;
+  }
+
+  .project-detail__video {
+    display: block;
+    width: 100%;
+    max-height: min(72vh, 48rem);
+    border-radius: 1.25rem;
+    background: #241c1c;
+  }
+
+  .project-detail__download {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    margin-top: 1rem;
+    border: 1px solid rgb(92 48 59 / 0.32);
+    border-radius: 999px;
+    padding: 0.65rem 1rem;
+    color: var(--project-wine);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .project-detail__download:hover,
+  .project-detail__download:focus-visible {
+    background: var(--project-wine);
+    color: #fffaf4;
+  }
+
+  .project-detail__downloads {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.6rem;
+  }
+
+  .project-detail__decisions {
+    display: grid;
+    gap: 0.8rem;
+    max-width: 55rem;
+    margin: 0;
+    padding-left: 1.25rem;
+    color: rgb(63 40 35 / 0.8);
+    line-height: 1.7;
+  }
+
+  .project-detail__decisions li::marker {
+    color: var(--project-wine);
+  }
+
+  .project-detail__note {
+    margin: 0;
+    border-left: 3px solid var(--project-wine);
+    padding: 1rem 1.2rem;
+    background: rgb(92 48 59 / 0.06);
+    line-height: 1.65;
+  }
+
+  .project-detail__section--last {
+    padding-bottom: 5rem;
+  }
+
+  @media (min-width: 48rem) {
+    .project-detail__creative-grid,
+    .project-detail__comparison {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+</style>

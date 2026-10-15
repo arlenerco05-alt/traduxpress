@@ -6,7 +6,7 @@
     "font": "Satoshi",
     "tagline": "Tus palabras sin fronteras.",
     "logoImage": "/logo.png",
-    "favicon": "/favicon.svg",
+    "favicon": "/logo.png",
     "logoSuffix": "Logo"
   },
   "address": "",

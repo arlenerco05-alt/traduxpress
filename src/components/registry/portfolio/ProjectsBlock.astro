@@ -3,7 +3,7 @@ import Section from "@components/ui/layout/Section.astro";
 import Container from "@components/ui/layout/Container.astro";
 import Heading from "@components/ui/atoms/Heading.astro";
 import Text from "@components/ui/atoms/Text.astro";
-import SmartImage from "@components/ui/atoms/SmartImage.astro";
+import ProjectCard from "@components/portfolio/ProjectCard.astro";
 import jsonData from "@data/sections/nova-projects.json";
 import { ACTIVE_TEMPLATE } from "@config/template";
 
@@ -11,11 +11,11 @@ type Project = {
   category: string;
   categoryKey?: string;
   title: string;
-  image: string;
   alt: string;
   slug?: string;
   href?: string;
-  published?: boolean;
+  previewImage?: string;
+  available?: boolean;
 };
 type ProjectFilter = { key: string; label: string };
 interface Props {
@@ -26,11 +26,13 @@ interface Props {
   items?: Project[];
   filtersLabel?: string;
   filters?: ProjectFilter[];
-  draftLabel?: string;
-  publishedLabel?: string;
+  actionLabel?: string;
+  previewLabel?: string;
+  upcomingLabel?: string;
   locale?: "pl" | "en";
   class?: string;
 }
+
 const props = Astro.props as Props;
 const fallback = ACTIVE_TEMPLATE === "nova" ? undefined : jsonData;
 const title = props.title ?? fallback?.title;
@@ -40,26 +42,28 @@ const linkHref = props.linkHref ?? fallback?.linkHref;
 const fallbackItems: Project[] = (fallback?.items ?? []).map((item) => ({
   ...item,
   categoryKey: "",
-  published: true,
+  available: true,
 }));
-const items: Project[] = props.items ?? fallbackItems;
+const items = props.items ?? fallbackItems;
 const filters = props.filters ?? [];
+const locale = props.locale ?? "pl";
+const actionLabel = props.actionLabel ?? (locale === "en" ? "View project" : "Ver proyecto");
+const previewLabel = props.previewLabel ?? (locale === "en" ? "Visual sample pending" : "Muestra visual pendiente");
+const upcomingLabel = props.upcomingLabel ?? (locale === "en" ? "Coming soon" : "Próximamente");
 const getProjectHref = (item: Project) => item.href ?? (
-  item.slug ? `${props.locale === "en" ? "/projects" : "/proyectos"}/${item.slug}/` : linkHref
+  item.slug ? `${locale === "en" ? "/projects" : "/proyectos"}/${item.slug}/` : linkHref ?? "#"
 );
 ---
 
 <Section id="realizacje" tone="page" class:list={["relative z-[1] -mt-4 rounded-t-[var(--rounded-lg)] pb-16", props.class]}>
   <Container class="w-full max-w-none px-[clamp(1.5rem,5vw,5rem)]">
     <div class="projects-intro">
-      <div>
-        <Heading tag="h2" variant="section-title">{title}</Heading>
-      </div>
-      <div>
+      <Heading tag="h2" variant="section-title">{title}</Heading>
+      <div class="projects-intro__copy">
         <Text variant="lead">{description}</Text>
         <a class="projects-link group" href={linkHref}>
-          <Text tag="span" variant="body" class="transition-transform duration-300 ease-out group-hover:-translate-x-1 motion-reduce:transition-none">{linkLabel}</Text>
-          <span class="inline-flex size-5 items-center justify-center leading-none transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true">→</span>
+          <span>{linkLabel}</span>
+          <span aria-hidden="true">→</span>
         </a>
       </div>
     </div>
@@ -81,37 +85,21 @@ const getProjectHref = (item: Project) => item.href ?? (
       )}
 
       <div class="projects-grid" data-project-grid>
-      {items.map((item) => (
-        <a
-          class="project-card__link group"
-          href={getProjectHref(item)}
-          data-project-card
-          data-project-category={item.categoryKey ?? ""}
-        >
-          <article class="project-card">
-          <figure>
-            <SmartImage src={item.image} alt={item.alt} width={1280} height={800} loading="lazy" class="transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02] motion-reduce:transition-none" />
-            {(props.draftLabel || props.publishedLabel) && (
-              <span class="project-card__status">
-                {item.published ? props.publishedLabel : props.draftLabel}
-              </span>
-            )}
-            <figcaption class="project-card__overlay">
-              <div class="min-w-0">
-                <span class="project-card__category">{item.category}</span>
-                <Heading tag="h3" variant="feature-title" class="project-card__title">{item.title}</Heading>
-              </div>
-              <span class="project-card__arrow overflow-hidden" aria-hidden="true">
-                <span class="relative flex size-5 items-center justify-center leading-none">
-                  <span class="absolute inset-0 flex items-center justify-center leading-none transition-transform duration-300 ease-out group-hover:translate-x-[140%] group-hover:-translate-y-[140%] motion-reduce:transition-none">↗</span>
-                  <span class="absolute inset-0 flex items-center justify-center leading-none -translate-x-[140%] translate-y-[140%] transition-transform duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 motion-reduce:transition-none">↗</span>
-                </span>
-              </span>
-            </figcaption>
-          </figure>
-          </article>
-        </a>
-      ))}
+        {items.map((item) => (
+          <div data-project-card data-project-category={item.categoryKey ?? ""}>
+            <ProjectCard
+              title={item.title}
+              category={item.category}
+              alt={item.alt}
+              href={getProjectHref(item)}
+              available={item.available !== false}
+              previewImage={item.previewImage}
+              actionLabel={actionLabel}
+              previewLabel={previewLabel}
+              upcomingLabel={upcomingLabel}
+            />
+          </div>
+        ))}
       </div>
     </div>
   </Container>
@@ -135,13 +123,39 @@ const getProjectHref = (item: Project) => item.href ?? (
       filterButton.setAttribute("aria-pressed", filterButton === button ? "true" : "false");
     });
 
-    grid.querySelectorAll<HTMLAnchorElement>("[data-project-card]").forEach((card) => {
+    grid.querySelectorAll<HTMLElement>("[data-project-card]").forEach((card) => {
       card.hidden = selectedCategory !== "all" && card.dataset.projectCategory !== selectedCategory;
     });
   });
 </script>
 
 <style>
+  .projects-intro {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .projects-intro__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .projects-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--color-brand-dark);
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .projects-link:hover,
+  .projects-link:focus-visible {
+    color: var(--color-brand-accent);
+  }
+
   .projects-filters {
     display: flex;
     flex-wrap: wrap;
@@ -174,153 +188,15 @@ const getProjectHref = (item: Project) => item.href ?? (
     outline-offset: 3px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .projects-filter {
-      transition: none;
-    }
-  }
-
-  .projects-intro {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .projects-intro > div:first-child {
-    min-width: 0;
-  }
-
-  .projects-intro > div:last-child {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    min-width: 0;
-  }
-
-  .projects-intro :global(.ui-type-section-title) {
-    max-width: 37rem;
-  }
-
-  .projects-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: var(--color-brand-dark);
-    text-decoration: none;
-  }
-
-  .projects-link:hover,
-  .projects-link:focus-visible {
-    color: var(--color-brand-accent);
-  }
-
   .projects-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
     margin-top: 1.5rem;
   }
 
   .projects-grid > [hidden] {
     display: none !important;
-  }
-
-  .project-card {
-    min-width: 0;
-  }
-
-  .project-card__link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .project-card__link:focus-visible {
-    outline: 2px solid var(--color-brand-accent);
-    outline-offset: 3px;
-  }
-
-  .project-card figure {
-    position: relative;
-    display: grid;
-    aspect-ratio: 3 / 2;
-    margin: 0;
-    overflow: hidden;
-    place-items: center;
-    border-radius: var(--ui-radius-lg);
-    background: var(--color-surface-container-low);
-  }
-
-  .project-card__status {
-    position: absolute;
-    z-index: 1;
-    top: 1rem;
-    left: 1rem;
-    max-width: calc(100% - 2rem);
-    border: 1px solid rgb(255 255 255 / 0.55);
-    border-radius: 9999px;
-    padding: 0.45rem 0.75rem;
-    background: rgb(255 248 239 / 0.94);
-    color: var(--color-brand-dark);
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .project-card figure :global(picture),
-  .project-card figure :global(img) {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .project-card figure :global(img) {
-    object-fit: cover;
-  }
-
-  .project-card__overlay {
-    position: absolute;
-    inset: auto 0 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 0.72) 100%);
-    color: var(--color-surface);
-  }
-
-  .project-card__title {
-    margin: 0;
-    color: inherit;
-    text-align: left;
-  }
-
-  .project-card__category {
-    display: block;
-    margin-bottom: 0.4rem;
-    color: rgb(255 255 255 / 0.8);
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .project-card__arrow {
-    display: grid;
-    flex: 0 0 auto;
-    width: 2.75rem;
-    height: 2.75rem;
-    place-items: center;
-    border: 1px solid rgb(255 255 255 / 0.45);
-    border-radius: 999px;
-    background: var(--color-brand-accent);
-    color: var(--color-brand-dark);
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    line-height: 1;
   }
 
   @media (min-width: 48rem) {
@@ -329,22 +205,27 @@ const getProjectHref = (item: Project) => item.href ?? (
       gap: 2.75rem;
     }
 
-    .projects-intro > div:last-child {
-      align-self: end;
+    .projects-intro__copy {
       align-items: flex-end;
-      justify-content: flex-end;
       text-align: right;
     }
 
     .projects-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1.5rem;
-      align-items: stretch;
     }
+  }
 
-    .project-card figure {
-      height: clamp(22rem, 34vw, 32rem);
-      aspect-ratio: auto;
+  @media (min-width: 80rem) {
+    .projects-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .projects-filter,
+    .projects-link {
+      transition: none;
     }
   }
 </style>

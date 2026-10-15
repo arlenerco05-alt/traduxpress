@@ -76,9 +76,9 @@ function resolveSection(section: PageSection): Resolved | null {
           category: projectCopy.category,
           categoryKey: project.categoryKey,
           title: projectCopy.title,
-          image: project.image,
           alt: projectCopy.imageAlt,
-          published: project.published,
+          previewImage: project.media.previewImage,
+          available: project.available,
         };
       });
     }

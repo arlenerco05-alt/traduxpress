@@ -65,7 +65,6 @@ const reviewApiUrl = import.meta.env.PUBLIC_REVIEW_API_URL || '';
 const reviewProject = import.meta.env.PUBLIC_REVIEW_PROJECT || '';
 
 const { 
-	title = seo.defaultTitle, 
 	description = seo.defaultDescription,
 	ogImage = seo.defaultOgImage,
 	noIndex = isStaging || !seo.index,
@@ -83,6 +82,7 @@ const {
 	clientRuntime = true,
 	enableLenis = true,
 } = Astro.props;
+const title = company.name;
 
 // Meta robots value: noindex wins, for public pages follow from seo.json decides.
 const robotsContent = `${noIndex ? 'noindex' : 'index'}, ${seo.follow ? 'follow' : 'nofollow'}`;
@@ -238,7 +238,10 @@ const mainPaddingStyle = fullBleedTop
 			// Why: project data can provide a custom favicon
 			// (company.branding.favicon). Fallback to default favicon set.
 			company.branding.favicon ? (
-				<link rel="icon" type="image/png" href={company.branding.favicon} />
+				<>
+					<link rel="icon" type="image/png" href={publicAsset(company.branding.favicon)} />
+					<link rel="apple-touch-icon" href={publicAsset(company.branding.favicon)} />
+				</>
 			) : (
 				<>
 					<link rel="icon" type="image/svg+xml" href={publicAsset('/favicon.svg')} />

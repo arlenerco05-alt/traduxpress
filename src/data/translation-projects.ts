@@ -1,27 +1,42 @@
-type LanguageCode = "en" | "es" | "es-SV";
-type PortfolioCategory = "marketing" | "institutional" | "localization" | "audiovisual";
+export type LanguageCode = "en" | "es" | "es-SV";
+export type PortfolioCategory = "marketing" | "institutional" | "localization" | "audiovisual";
+export type ProjectKind = "transcreation" | "localization" | "editing" | "subtitling";
 
 type ProjectCopy = {
   title: string;
   category: string;
   type: string;
   context: string;
-  objective: string;
-  audience: string;
   decisions: string[];
-  visual: string;
-  imageAlt: string;
   note: string;
+  imageAlt: string;
+};
+
+export type ProjectMedia = {
+  previewImage?: string;
+  originalArtwork?: string;
+  adaptedArtwork?: string;
+  screenshots?: string[];
+  bilingualDocument?: string;
+  sourceDocument?: string;
+  trackedChangesDocument?: string;
+  correctedDocument?: string;
+  video?: string;
+  poster?: string;
+  subtitles?: string;
 };
 
 export type TranslationProject = {
   slug: string;
-  image: string;
+  kind: ProjectKind;
   categoryKey: PortfolioCategory;
-  published: boolean;
+  available: boolean;
   direction: [LanguageCode, LanguageCode];
-  original: string;
-  translated: string;
+  sourceText?: string;
+  targetText?: string;
+  beforeText?: string;
+  afterText?: string;
+  media: ProjectMedia;
   es: ProjectCopy;
   en: ProjectCopy;
 };
@@ -29,200 +44,190 @@ export type TranslationProject = {
 export const projects: TranslationProject[] = [
   {
     slug: "skittles-taste-the-rainbow",
-    image: "/assets/images/t001-nova/t001-nova-project-laptop.webp",
+    kind: "transcreation",
     categoryKey: "marketing",
-    published: false,
+    available: true,
     direction: ["en", "es-SV"],
-    original: "[Pendiente: texto original de la campaña en inglés.]",
-    translated: "[Pendiente: propuesta de transcreación al español salvadoreño.]",
+    sourceText: "Taste the Rainbow!",
+    targetText: "¡Saboreá a todo color!",
+    media: {},
     es: {
-      title: "Skittles — Taste the Rainbow",
-      category: "Marketing",
+      title: "Skittles | Transcreación publicitaria",
+      category: "Traducción creativa y adaptación publicitaria",
       type: "Transcreación publicitaria",
-      context: "Adaptación creativa de un eslogan publicitario internacional para el mercado salvadoreño.",
-      objective: "Explorar una formulación en español salvadoreño que conserve la intención creativa del mensaje original.",
-      audience: "Público del mercado salvadoreño.",
-      decisions: ["Las decisiones de transcreación se documentarán cuando se desarrolle la propuesta."],
-      visual: "Pendiente. La imagen de esta página es ilustrativa y no es una pieza de campaña.",
-      imageAlt: "Imagen ilustrativa provisional para un ejercicio de transcreación publicitaria.",
-      note: "Ejercicio independiente de portafolio; no es una colaboración oficial con Skittles ni un trabajo encargado, publicado o aprobado por la marca.",
+      context: "Adaptación creativa del eslogan «Taste the Rainbow!» al español salvadoreño.",
+      decisions: [
+        "El voseo de «saboreá» aporta cercanía y naturalidad en el español salvadoreño.",
+        "«A todo color» conserva la asociación con el arcoíris y el tono alegre sin traducir literalmente la estructura del original.",
+      ],
+      note: "Proyecto independiente de muestra. No afiliado ni encargado por Skittles.",
+      imageAlt: "Espacio reservado para la pieza original y la propuesta tipográfica de transcreación.",
     },
     en: {
-      title: "Skittles — Taste the Rainbow",
-      category: "Marketing",
+      title: "Skittles | Advertising transcreation",
+      category: "Creative translation and advertising adaptation",
       type: "Advertising transcreation",
-      context: "Creative adaptation of an international advertising slogan for the Salvadoran market.",
-      objective: "Explore Salvadoran Spanish wording that preserves the creative intent of the original message.",
-      audience: "An audience in the Salvadoran market.",
-      decisions: ["Transcreation decisions will be documented when the proposal is developed."],
-      visual: "Pending. The image on this page is illustrative and is not a campaign asset.",
-      imageAlt: "Temporary illustrative image for an advertising transcreation exercise.",
-      note: "Independent portfolio exercise; not an official collaboration with Skittles and not commissioned, published, or approved by the brand.",
+      context: "Creative adaptation of “Taste the Rainbow!” into Salvadoran Spanish.",
+      decisions: [
+        "The voseo form “saboreá” gives the line a natural, locally familiar voice.",
+        "“A todo color” keeps the rainbow association and playful tone without following the source structure word for word.",
+      ],
+      note: "Independent sample project. Not affiliated with or commissioned by Skittles.",
+      imageAlt: "Reserved space for the original artwork and typographic transcreation proposal.",
     },
   },
   {
-    slug: "campana-gastronomica-salvadorena",
-    image: "/assets/images/t001-nova/t001-nova-project-building.webp",
-    categoryKey: "marketing",
-    published: false,
-    direction: ["es-SV", "en"],
-    original: "[Pendiente: texto original de la campaña en español salvadoreño.]",
-    translated: "[Pendiente: adaptación al inglés.]",
-    es: {
-      title: "Campaña gastronómica salvadoreña",
-      category: "Marketing",
-      type: "Traducción y adaptación cultural",
-      context: "Adaptación de contenido publicitario gastronómico para una audiencia angloparlante.",
-      objective: "Trasladar el mensaje y sus referencias culturales a un inglés natural para la audiencia prevista.",
-      audience: "Audiencia angloparlante; mercado específico por definir.",
-      decisions: ["Las decisiones lingüísticas y culturales se documentarán cuando se desarrolle la adaptación."],
-      visual: "Pendiente. La imagen de esta página es ilustrativa y no es una pieza publicitaria.",
-      imageAlt: "Imagen ilustrativa provisional para un ejercicio de adaptación de contenido gastronómico.",
-      note: "Ejercicio independiente de portafolio; no es una colaboración oficial con una marca o negocio ni un trabajo encargado, publicado o aprobado.",
-    },
-    en: {
-      title: "Salvadoran Food Campaign",
-      category: "Marketing",
-      type: "Translation and cultural adaptation",
-      context: "Adaptation of food-related advertising content for an English-speaking audience.",
-      objective: "Carry the message and its cultural references into natural English for the intended audience.",
-      audience: "English-speaking audience; specific market to be determined.",
-      decisions: ["Linguistic and cultural decisions will be documented when the adaptation is developed."],
-      visual: "Pending. The image on this page is illustrative and is not an advertising asset.",
-      imageAlt: "Temporary illustrative image for a food-content adaptation exercise.",
-      note: "Independent portfolio exercise; not an official collaboration with a brand or business and not commissioned, published, or approved.",
-    },
-  },
-  {
-    slug: "informe-de-actividades",
-    image: "/assets/images/t001-nova/t001-nova-project-laptop.webp",
-    categoryKey: "institutional",
-    published: false,
-    direction: ["es", "en"],
-    original: "[Pendiente: fragmento del informe original en español.]",
-    translated: "[Pendiente: traducción al inglés.]",
-    es: {
-      title: "Informe de actividades",
-      category: "Institucional",
-      type: "Traducción institucional",
-      context: "Traducción de un informe organizacional con atención a la terminología y el registro formal.",
-      objective: "Mantener la precisión terminológica y un registro formal coherente en inglés.",
-      audience: "Personas lectoras del informe; institución y audiencia específicas por definir.",
-      decisions: ["La terminología y las decisiones de registro se documentarán cuando se desarrolle la traducción."],
-      visual: "Pendiente. La imagen de esta página es ilustrativa y no es una página del informe.",
-      imageAlt: "Imagen ilustrativa provisional para un ejercicio de traducción institucional.",
-      note: "Ejercicio independiente de portafolio; no es una colaboración oficial con una organización ni un informe encargado, publicado o aprobado.",
-    },
-    en: {
-      title: "Activity Report",
-      category: "Institutional",
-      type: "Institutional translation",
-      context: "Translation of an organizational report, with attention to terminology and formal register.",
-      objective: "Maintain terminological accuracy and a consistent formal register in English.",
-      audience: "Readers of the report; the specific organization and audience are to be determined.",
-      decisions: ["Terminology and register decisions will be documented when the translation is developed."],
-      visual: "Pending. The image on this page is illustrative and is not a page from the report.",
-      imageAlt: "Temporary illustrative image for an institutional translation exercise.",
-      note: "Independent portfolio exercise; not an official collaboration with an organization and not a commissioned, published, or approved report.",
-    },
-  },
-  {
-    slug: "comunicacion-corporativa",
-    image: "/assets/images/t001-nova/t001-nova-project-building.webp",
-    categoryKey: "institutional",
-    published: false,
-    direction: ["en", "es"],
-    original: "[Pendiente: texto original de la comunicación en inglés.]",
-    translated: "[Pendiente: traducción al español.]",
-    es: {
-      title: "Comunicación corporativa",
-      category: "Institucional",
-      type: "Traducción institucional",
-      context: "Traducción de comunicaciones empresariales con énfasis en claridad y precisión.",
-      objective: "Comunicar el contenido con claridad y precisión en español, manteniendo el propósito del original.",
-      audience: "Personas destinatarias de la comunicación; empresa y público específicos por definir.",
-      decisions: ["Las decisiones de terminología, tono y registro se documentarán cuando se desarrolle la traducción."],
-      visual: "Pendiente. La imagen de esta página es ilustrativa y no es una comunicación empresarial.",
-      imageAlt: "Imagen ilustrativa provisional para un ejercicio de traducción corporativa.",
-      note: "Ejercicio independiente de portafolio; no es una colaboración oficial con una empresa ni una comunicación encargada, publicada o aprobada.",
-    },
-    en: {
-      title: "Corporate Communication",
-      category: "Institutional",
-      type: "Institutional translation",
-      context: "Translation of business communications, with an emphasis on clarity and accuracy.",
-      objective: "Communicate the content clearly and accurately in Spanish while preserving the source purpose.",
-      audience: "Recipients of the communication; the specific company and audience are to be determined.",
-      decisions: ["Terminology, tone, and register decisions will be documented when the translation is developed."],
-      visual: "Pending. The image on this page is illustrative and is not a business communication.",
-      imageAlt: "Temporary illustrative image for a corporate translation exercise.",
-      note: "Independent portfolio exercise; not an official collaboration with a company and not a commissioned, published, or approved communication.",
-    },
-  },
-  {
-    slug: "sitio-web-bilingue",
-    image: "/assets/images/t001-nova/t001-nova-project-laptop.webp",
+    slug: "capricho-beach-house-localizacion-web",
+    kind: "localization",
     categoryKey: "localization",
-    published: false,
+    available: true,
     direction: ["en", "es-SV"],
-    original: "[Pendiente: contenido original del sitio web en inglés.]",
-    translated: "[Pendiente: contenido localizado al español salvadoreño.]",
+    media: {},
     es: {
-      title: "Sitio web bilingüe",
-      category: "Localización",
+      title: "Capricho Beach House | Localización web",
+      category: "Localización de sitios web",
       type: "Localización web",
-      context: "Adaptación lingüística y cultural de contenidos digitales para el mercado salvadoreño.",
-      objective: "Ajustar el contenido digital al uso lingüístico y al contexto cultural del público salvadoreño.",
-      audience: "Público del mercado salvadoreño; sector y organización por definir.",
-      decisions: ["Las decisiones de localización se documentarán cuando se desarrolle la adaptación."],
-      visual: "Pendiente. La imagen de esta página es ilustrativa y no es una captura del sitio localizado.",
-      imageAlt: "Imagen ilustrativa provisional para un ejercicio de localización web.",
-      note: "Ejercicio independiente de portafolio; no es una colaboración oficial con una empresa ni un sitio encargado, publicado o aprobado.",
+      context: "Localización de contenido turístico y hotelero, con atención a la terminología, la naturalidad del español, la experiencia del usuario y la adaptación cultural.",
+      decisions: [
+        "La terminología turística se ajusta al uso natural del español salvadoreño.",
+        "La estructura y el tono se consideran desde la perspectiva de la experiencia de quien visita el sitio.",
+      ],
+      note: "Muestra independiente de portafolio; no fue encargada por Capricho Beach House.",
+      imageAlt: "Espacio reservado para capturas de la localización web de Capricho Beach House.",
     },
     en: {
-      title: "Bilingual Website",
-      category: "Localization",
+      title: "Capricho Beach House | Website localization",
+      category: "Website localization",
       type: "Website localization",
-      context: "Linguistic and cultural adaptation of digital content for the Salvadoran market.",
-      objective: "Adapt digital content to the language use and cultural context of a Salvadoran audience.",
-      audience: "An audience in the Salvadoran market; sector and organization to be determined.",
-      decisions: ["Localization decisions will be documented when the adaptation is developed."],
-      visual: "Pending. The image on this page is illustrative and is not a screenshot of the localized site.",
-      imageAlt: "Temporary illustrative image for a website localization exercise.",
-      note: "Independent portfolio exercise; not an official collaboration with a company and not a commissioned, published, or approved website.",
+      context: "Localization of tourism and hospitality content, with attention to terminology, natural Spanish, user experience, and cultural adaptation.",
+      decisions: [
+        "Tourism terminology is adapted to natural Salvadoran Spanish usage.",
+        "Structure and tone are considered from the perspective of the visitor's user experience.",
+      ],
+      note: "Independent portfolio sample; not commissioned by Capricho Beach House.",
+      imageAlt: "Reserved space for screenshots of the Capricho Beach House website localization.",
     },
   },
   {
-    slug: "subtitulacion-de-video",
-    image: "/assets/images/t001-nova/t001-nova-project-building.webp",
-    categoryKey: "audiovisual",
-    published: false,
-    direction: ["en", "es"],
-    original: "[Pendiente: fragmento del guion o diálogo original en inglés.]",
-    translated: "[Pendiente: subtítulos traducidos al español.]",
+    slug: "northbridge-business-solutions-edicion",
+    kind: "editing",
+    categoryKey: "institutional",
+    available: true,
+    direction: ["en", "en"],
+    media: {},
     es: {
-      title: "Subtitulación de video",
-      category: "Audiovisual",
-      type: "Traducción audiovisual",
-      context: "Traducción y adaptación de contenido audiovisual mediante subtítulos.",
-      objective: "Preparar subtítulos en español que comuniquen el contenido con claridad y se ajusten al material audiovisual.",
-      audience: "Audiencia hispanohablante; contenido y plataforma por definir.",
-      decisions: ["Las decisiones de traducción, segmentación y sincronización se documentarán cuando se desarrolle el proyecto."],
-      visual: "Pendiente. La imagen de esta página es ilustrativa y no es un fotograma del video.",
-      imageAlt: "Imagen ilustrativa provisional para un ejercicio de traducción audiovisual.",
-      note: "Ejercicio independiente de portafolio; no es una colaboración oficial con una productora ni un video encargado, publicado o aprobado.",
+      title: "Northbridge Business Solutions | Corrección y edición",
+      category: "Corrección de estilo y edición corporativa",
+      type: "Corrección y edición",
+      context: "Revisión lingüística de un perfil corporativo en inglés estadounidense, enfocada en gramática, puntuación, claridad, coherencia y estilo profesional.",
+      decisions: [
+        "La revisión se centra en gramática, puntuación, claridad y coherencia del texto.",
+        "La edición mantiene un tono profesional en inglés estadounidense.",
+      ],
+      note: "Proyecto simulado de una empresa ficticia; no representa una organización real.",
+      imageAlt: "Espacio reservado para la comparación antes y después del perfil corporativo.",
     },
     en: {
-      title: "Video Subtitling",
-      category: "Audiovisual",
-      type: "Audiovisual translation",
-      context: "Translation and adaptation of audiovisual content through subtitles.",
-      objective: "Prepare Spanish subtitles that communicate the content clearly and fit the audiovisual material.",
-      audience: "Spanish-speaking audience; content and platform to be determined.",
-      decisions: ["Translation, segmentation, and timing decisions will be documented when the project is developed."],
-      visual: "Pending. The image on this page is illustrative and is not a frame from the video.",
-      imageAlt: "Temporary illustrative image for an audiovisual translation exercise.",
-      note: "Independent portfolio exercise; not an official collaboration with a production company and not a commissioned, published, or approved video.",
+      title: "Northbridge Business Solutions | Copyediting",
+      category: "Corporate proofreading and editing",
+      type: "Proofreading and copyediting",
+      context: "Language review of a corporate profile in US English, focusing on grammar, punctuation, clarity, consistency, and professional style.",
+      decisions: [
+        "The review focuses on grammar, punctuation, clarity, and consistency.",
+        "The edit maintains a professional tone in US English.",
+      ],
+      note: "Simulated project for a fictional company; it does not represent a real organization.",
+      imageAlt: "Reserved space for the before-and-after corporate profile comparison.",
+    },
+  },
+  {
+    slug: "capricho-beach-house-subtitulacion",
+    kind: "subtitling",
+    categoryKey: "audiovisual",
+    available: true,
+    direction: ["es", "en"],
+    media: {},
+    es: {
+      title: "Capricho Beach House | Subtitulación audiovisual",
+      category: "Subtitulación turística y contenido multilingüe",
+      type: "Subtitulación audiovisual",
+      context: "Traducción, segmentación y sincronización de subtítulos para un reportaje turístico sobre Capricho Beach House y Barra de Santiago, El Salvador. Incluye la transcripción de intervenciones originalmente en inglés.",
+      decisions: [
+        "La traducción al inglés conserva el contenido y el contexto del reportaje turístico.",
+        "La segmentación y sincronización de subtítulos se ajustan al ritmo de las intervenciones.",
+      ],
+      note: "Muestra independiente de subtitulación; no es un encargo oficial del establecimiento.",
+      imageAlt: "Espacio reservado para el video de muestra independiente de subtitulación turística.",
+    },
+    en: {
+      title: "Capricho Beach House | Video subtitling",
+      category: "Tourism subtitling and multilingual content",
+      type: "Audiovisual subtitling",
+      context: "Translation, segmentation, and timing of subtitles for a tourism feature about Capricho Beach House and Barra de Santiago, El Salvador. Includes transcription of dialogue originally spoken in English.",
+      decisions: [
+        "The English translation preserves the content and context of the tourism feature.",
+        "Subtitle segmentation and timing follow the pace of the spoken dialogue.",
+      ],
+      note: "Independent subtitling sample; not an official commission by the establishment.",
+      imageAlt: "Reserved space for the independent tourism subtitling sample video.",
+    },
+  },
+  {
+    slug: "glossarie-subtitulacion-publicitaria",
+    kind: "subtitling",
+    categoryKey: "audiovisual",
+    available: true,
+    direction: ["en", "es"],
+    media: {},
+    es: {
+      title: "Glossarie | Subtitulación publicitaria",
+      category: "Subtitulación audiovisual y traducción publicitaria",
+      type: "Subtitulación publicitaria",
+      context: "Traducción y subtitulación de un anuncio breve de cuidado de la piel sobre una solución de ácido salicílico al 2 %, con atención a la terminología cosmética, la adaptación del mensaje y la sincronización.",
+      decisions: [
+        "La terminología cosmética se trata con precisión y claridad.",
+        "El diseño de subtítulos previsto utiliza recuadros rosados y texto blanco, sincronizados con el anuncio.",
+      ],
+      note: "Muestra independiente de portafolio; no se atribuye a un encargo oficial.",
+      imageAlt: "Espacio reservado para el video publicitario subtitulado de Glossarie.",
+    },
+    en: {
+      title: "Glossarie | Advertising subtitling",
+      category: "Audiovisual subtitling and advertising translation",
+      type: "Advertising subtitling",
+      context: "Translation and subtitling of a short skincare advertisement for a 2% salicylic acid solution, with attention to cosmetic terminology, message adaptation, and timing.",
+      decisions: [
+        "Cosmetic terminology is handled with accuracy and clarity.",
+        "The planned subtitle design uses pink boxes with white text, timed to the advertisement.",
+      ],
+      note: "Independent portfolio sample; not represented as an official commission.",
+      imageAlt: "Reserved space for the subtitled Glossarie advertising video.",
+    },
+  },
+  {
+    slug: "traduccion-corporativa",
+    kind: "localization",
+    categoryKey: "institutional",
+    available: false,
+    direction: ["en", "es"],
+    media: {},
+    es: {
+      title: "Traducción corporativa",
+      category: "Traducción de documentos empresariales",
+      type: "Traducción corporativa",
+      context: "Proyecto en desarrollo.",
+      decisions: [],
+      note: "Próximamente.",
+      imageAlt: "Tarjeta de proyecto de traducción corporativa próximamente.",
+    },
+    en: {
+      title: "Corporate translation",
+      category: "Business document translation",
+      type: "Corporate translation",
+      context: "Project in development.",
+      decisions: [],
+      note: "Coming soon.",
+      imageAlt: "Coming soon corporate translation project card.",
     },
   },
 ];

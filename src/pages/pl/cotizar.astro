@@ -1,0 +1,19 @@
+---
+import Layout from "@layouts/Layout.astro";
+import QuotePage from "@components/quote/QuotePage.astro";
+import { getNovaCopy } from "@utils/nova-i18n";
+
+const locale = "pl";
+const copy = getNovaCopy(locale);
+---
+
+<Layout
+  title={copy.quote.title}
+  description={copy.quote.subtitle}
+  locale={locale}
+  lang="es"
+  navbarVariant="plain"
+  footerVariant="nova"
+>
+  <QuotePage locale={locale} />
+</Layout>
